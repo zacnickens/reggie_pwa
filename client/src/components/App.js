@@ -5,11 +5,9 @@ import PrivateRoute from './PrivateRoute';
 
 function App() {
   return (
-    <Routes>
-      <Routes>
-        <PrivateRoute exact path="/" component={ProductList} />
-      </Routes>
-    </Routes>
+    <div className="App">
+      <ProductList />
+    </div>
   );
 }
 
