@@ -1,37 +1,25 @@
 {
-    "name": "react-square-product-app",
+    "name": "reggie-pwa",
     "version": "1.0.0",
-    "private": true,
-    "dependencies": {
-        "axios": "^0.21.1",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-qr-reader": "^2.2.1",
-        "react-router-dom": "^5.2.0",
-        "react-scripts": "^5.0.1"
-    },
+    "description": "Reggie Progressive Web App using React and Node.js",
+    "main": "server/server.js",
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "start": "node server/server.mjs",
+        "server": "nodemon --watch 'server/**/*.{mjs,json}' --exec 'node' server/server.mjs",
+        "dev": "concurrently \"npm run start\" \"npx nodemon --watch client/**/*.{ts,tsx}\""
     },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.0",
+        "express": "^4.17.3",
+        "jsonwebtoken": "^9.0.0",
+        "mongoose": "^6.7.5",
+        "react-qr-reader": "^3.0.0-beta-1"
     },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
+    "devDependencies": {
+        "concurrently": "^8.2.2",
+        "nodemon": "^2.0.20"
     }
 }
