@@ -1,3 +1,3 @@
 import api from './api';
 
-exports.getProducts = () => api.get('/products');
+export const getProducts = () => api.get('/products');
