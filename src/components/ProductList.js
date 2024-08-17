@@ -6,29 +6,31 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const loadProducts = async () => {
+    const fetchProducts = async () => {
       try {
-        const fetchedProducts = await fetchProducts();
-        setProducts(fetchedProducts);
+        const response = await fetch('catalog/list');
+        const data = await response.json();
+        setProducts(data);
+        console.log('Product Data:', data); // Log the product data to the console
       } catch (error) {
-        console.error('Error loading products:', error);
+        console.error('Error fetching products:', error);
       }
     };
-    loadProducts();
+    fetchProducts();
   }, []);
 
   return (
     <div>
-      <h2>Product List</h2>
-      <div className="product-list">
-        {products.map(product => (
-          <Link to={`/product/${product.id}`} key={product.id} className="product-item">
-            <img src={product.image_url || '/placeholder-image.jpg'} alt={product.item_data.name} />
-            <h3>{product.item_data.name}</h3>
-            <p>${product.item_data.variations[0].item_variation_data.price_money.amount / 100}</p>
-          </Link>
-        ))}
-      </div>
+      {products.length > 0 ? (
+        products.map((product, index) => (
+          <div key={index}>
+            <h2>{product.name}</h2>
+            <p>Price: ${product.price}</p>
+          </div>
+        ))
+      ) : (
+        <p>No products found.</p>
+      )}
     </div>
   );
 };

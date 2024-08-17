@@ -13,14 +13,14 @@ const api = axios.create({
 });
 
 export const fetchProducts = async () => {
-  try {
-    const response = await api.get('/catalog/list');
-    return response.data.objects.filter(item => item.type === 'ITEM');
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    throw error;
-  }
-};
+    try {
+      const response = await api.get('/catalog/list');
+      return response.data.objects;
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      throw error;
+    }
+  };
 
 export const fetchProduct = async (id) => {
   try {

@@ -25,7 +25,7 @@ const App = () => {
     <Router>
       <div className="App">
         <header className="App-header">
-          <h1>Square Product App</h1>
+          <h1>Reggie & Dro Members App</h1>
           <nav>
             <ul>
               <li><Link to="/">Product List</Link></li>
