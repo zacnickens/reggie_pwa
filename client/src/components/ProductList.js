@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { getProducts } from '../services/productService';
+import React from 'react';
+import { useEffect, useState } from 'react';
+import getProducts from '../services/productService';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await getProducts();
+    
+        if (!response.ok) {
+          throw new Error(`Request failed with status code ${response.status}`);
+        }
+    
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error.message);
+      }
+    }
+
     fetchProducts();
   }, []);
 
-  const fetchProducts = async () => {
-    try {
-      const data = await productService.getProducts();
-      setProducts(data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
-  return (
-    <ul>
-      {products.map((product) => (
-        <li key={product.id}>{product.name}</li>
-      ))}
-    </ul>
-  );
 };
 
 export default ProductList;
