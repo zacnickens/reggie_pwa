@@ -1,19 +1,20 @@
-const { Client, Environment } = require('square');
+const { Client, APIException } = require('@square/client');
 
-// Remember to keep your access token secure, preferably in an environment variable
-const accessToken = process.env.SQUARE_ACCESS_TOKEN || 'YOUR_ACCESS_TOKEN_HERE';
-
+// Create a Square client instance with the base URL and access token
 const client = new Client({
-  accessToken: accessToken,
-  environment: Environment.Production, // Use Environment.Production for live data
+  accessToken: 'YOUR_ACCESS_TOKEN',
 });
 
-exports.getProducts = async () => {
+app.get('/products', async (req, res) => {
   try {
-    const response = await client.catalogApi.listCatalog();
-    return response.result;
+    const response = await client.restGET('https://connect.squareup.com/v2/catalog/list');
+    // process products data here
+    return res.json(response.json());
   } catch (error) {
-    console.error('Error fetching catalog:', error);
+    if (error instanceof APIException) {
+      console.error(error.message);
+      return res.status(500).send('Error fetching products data');
+    }
     throw error;
   }
-};
+});
